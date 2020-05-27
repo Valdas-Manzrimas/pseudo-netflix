@@ -1,0 +1,19 @@
+.Footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  padding: 0;
+  background-color: rgb(19, 18, 18);
+  height: 40px;
+}
+
+.Footer span {
+  font-size: 16px;
+  color: white;
+}
+
+img {
+  width: 40px;
+  margin: auto 0;
+}
