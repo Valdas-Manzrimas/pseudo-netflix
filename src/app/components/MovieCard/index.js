@@ -1,15 +1,17 @@
 import React from 'react';
-import './index.css';
+import './index.scss';
 import Title from '../Title';
-import SmallButton from '../buttons/SmallButton';
+import Button from '../Button';
+import MovieCardImage from '../MovieCardImage';
+import Description from '../Description';
 
-function MovieCard({ picture, title, description }) {
+function MovieCard({ source, title, description }) {
   return (
     <div className="MovieCard">
-      {picture}
+      <MovieCardImage source={source} />
       <Title level="3">{title}</Title>
-      {description}
-      <SmallButton>Favorite</SmallButton>
+      <Description>{description}</Description>
+      <Button size="small">Favorite</Button>
     </div>
   );
 }

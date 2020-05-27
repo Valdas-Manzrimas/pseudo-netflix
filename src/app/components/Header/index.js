@@ -2,13 +2,13 @@ import React from 'react';
 import './index.css';
 
 import Logo from '../Logo';
-import SmallButton from '../buttons/SmallButton';
+import Button from '../Button';
 
 function Header() {
   return (
     <div className="Header">
       <Logo />
-      <SmallButton>Sign in</SmallButton>
+      <Button size="small">Sign in</Button>
     </div>
   );
 }

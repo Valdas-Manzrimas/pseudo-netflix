@@ -2,13 +2,13 @@ import React from 'react';
 import './index.css';
 
 import Title from '../Title';
-import SmallButton from '../buttons/SmallButton';
+import Button from '../Button';
 
 function ImageScreen() {
   return (
     <div className="ImageScreen">
       <Title>Wanna more Content?</Title>
-      <SmallButton>Get Access</SmallButton>
+      <Button size="small">Get Access</Button>
     </div>
   );
 }

@@ -1,13 +1,20 @@
 button {
-  width: 100px;
   padding: 2px 10px;
   background-color: rgb(206, 36, 36);
   margin: 0 20px;
-  height: 24px;
   border-radius: 4px;
   cursor: pointer;
+  padding: 10px 30px;
 }
 
 button:hover {
   background-color: rgb(202, 80, 80);
+}
+
+.button--small {
+  padding: 6px 25px;
+}
+
+.button--large {
+  padding: 15px 40px;
 }
