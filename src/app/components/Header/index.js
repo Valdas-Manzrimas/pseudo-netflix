@@ -1,6 +1,7 @@
 import React from 'react';
 import './index.css';
 
+import { Link } from 'react-router-dom';
 import Logo from '../Logo';
 import Button from '../Button';
 
@@ -8,7 +9,9 @@ function Header() {
   return (
     <div className="Header">
       <Logo />
-      <Button size="small">Sign in</Button>
+      <Link size="small" to="/login">
+        Sign in
+      </Link>
     </div>
   );
 }

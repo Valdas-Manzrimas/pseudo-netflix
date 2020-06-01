@@ -1,12 +1,15 @@
 import React from 'react';
 import './index.scss';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 import Header from './components/Header';
 import ImageScreen from './components/ImageScreen';
 import MainContent from './components/MainContent';
 import Footer from './components/Footer';
 import MovieCard from './components/MovieCard';
-import MovieCardImage from './components/MovieCardImage';
+import Login from './pages/Login';
+
+// import Button from './components/Button';
 
 class App extends React.Component {
   constructor(props) {
@@ -15,6 +18,9 @@ class App extends React.Component {
       isLoading: false,
       error: null,
       data: [],
+      favorites: [],
+      // kai mygtukas paspaustas id eina i favorites
+      // if pressed --> mygtuko stilius pakeicia
     };
   }
   componentDidMount() {
@@ -29,91 +35,49 @@ class App extends React.Component {
       .then((data) => {
         this.setState({ data });
       })
-
       .catch(console.log);
   }
 
+  addFavorite(event) {
+    let movieCardId = event.target.parentNode.id;
+    // this.setState({ favorites: this.state.favorites.push(movieCardId) });
+    // console.log(this.state.favorites);
+  }
+
   render() {
-    console.log(this.state);
     return (
       <div className="App">
-        <Header />
-        <ImageScreen />
-        <MainContent>
-          {this.state.data.length > 0 && (
-            <MovieCard
-              title={this.state.data[0].title}
-              description={this.state.data[0].description}
-              source={this.state.data[0].image}
-            />
-          )}
-          {this.state.data.length > 0 && (
-            <MovieCard
-              title={this.state.data[1].title}
-              description={this.state.data[1].description}
-              source={this.state.data[1].image}
-            />
-          )}
-          {this.state.data.length > 0 && (
-            <MovieCard
-              title={this.state.data[2].title}
-              description={this.state.data[2].description}
-              source={this.state.data[2].image}
-            />
-          )}
-          {this.state.data.length > 0 && (
-            <MovieCard
-              title={this.state.data[3].title}
-              description={this.state.data[3].description}
-              source={this.state.data[3].image}
-            />
-          )}
-          {this.state.data.length > 0 && (
-            <MovieCard
-              title={this.state.data[4].title}
-              description={this.state.data[4].description}
-              source={this.state.data[4].image}
-            />
-          )}
-          {this.state.data.length > 0 && (
-            <MovieCard
-              title={this.state.data[5].title}
-              description={this.state.data[5].description}
-              source={this.state.data[5].image}
-            />
-          )}
-          {this.state.data.length > 0 && (
-            <MovieCard
-              title={this.state.data[6].title}
-              description={this.state.data[6].description}
-              source={this.state.data[6].image}
-            />
-          )}
-          {this.state.data.length > 0 && (
-            <MovieCard
-              title={this.state.data[7].title}
-              description={this.state.data[7].description}
-              source={this.state.data[7].image}
-            />
-          )}
-          {this.state.data.length > 0 && (
-            <MovieCard
-              title={this.state.data[8].title}
-              description={this.state.data[8].description}
-              source={this.state.data[8].image}
-            />
-          )}
-          {this.state.data.length > 0 && (
-            <MovieCard
-              title={this.state.data[9].title}
-              description={this.state.data[9].description}
-              source={this.state.data[9].image}
-            />
-          )}
-        </MainContent>
-        <Footer>
-          We care about your entertainment. Copyright © 2019–2020 felix.com
-        </Footer>
+        <Router>
+          <Header />
+          <Switch>
+            <Route exact path="/">
+              <ImageScreen />
+              <MainContent>
+                {this.state.data.map((item) => {
+                  return (
+                    this.state.data.length > 0 && (
+                      <MovieCard
+                        id={item.id}
+                        title={item.title}
+                        description={item.description}
+                        source={item.image}
+                        onClick={this.addFavorite}
+                      />
+                    )
+                  );
+                })}
+              </MainContent>
+            </Route>
+            <Route exact path="/login">
+              <MainContent>
+                <Login />
+              </MainContent>
+            </Route>
+          </Switch>
+          <Footer>
+            We care about your entertainment. Copyright © 2019–2020 felix.com
+          </Footer>
+        </Router>
       </div>
     );
   }

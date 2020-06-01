@@ -5,13 +5,15 @@ import Button from '../Button';
 import MovieCardImage from '../MovieCardImage';
 import Description from '../Description';
 
-function MovieCard({ source, title, description }) {
+function MovieCard({ source, title, description, onClick, id }) {
   return (
-    <div className="MovieCard">
+    <div className="MovieCard" id={id}>
       <MovieCardImage source={source} />
       <Title level="3">{title}</Title>
       <Description>{description}</Description>
-      <Button size="small">Favorite</Button>
+      <Button size="small" onClick={onClick}>
+        Favorite
+      </Button>
     </div>
   );
 }

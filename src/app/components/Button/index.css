@@ -5,10 +5,13 @@ button {
   border-radius: 4px;
   cursor: pointer;
   padding: 10px 30px;
+  outline: none;
+  border: 1px solid rgb(206, 36, 36);
 }
 
 button:hover {
   background-color: rgb(202, 80, 80);
+  border: 1px solid rgb(202, 80, 80);
 }
 
 .button--small {
@@ -17,4 +20,21 @@ button:hover {
 
 .button--large {
   padding: 15px 40px;
+}
+
+a {
+  padding: 6px 25px;
+  background-color: rgb(206, 36, 36);
+  margin: 0 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  outline: none;
+  border: 1px solid rgb(206, 36, 36);
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  background-color: rgb(202, 80, 80);
+  border: 1px solid rgb(202, 80, 80);
 }
