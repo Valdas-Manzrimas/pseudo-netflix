@@ -1,48 +1,25 @@
 import React from 'react';
 import './index.scss';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 
 import Header from './components/Header';
-import ImageScreen from './components/ImageScreen';
-import MainContent from './components/MainContent';
 import Footer from './components/Footer';
-import MovieCard from './components/MovieCard';
+import PrivateRoute from './components/PrivateRoute';
+import MainContent from './components/MainContent';
+import Home from './pages/Home';
 import Login from './pages/Login';
+import UserContent from './pages/UserContent';
+// import SingleCardPage from './pages/SingleCardPage';
 
 // import Button from './components/Button';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isLoading: false,
-      error: null,
-      data: [],
-      favorites: [],
-      // kai mygtukas paspaustas id eina i favorites
-      // if pressed --> mygtuko stilius pakeicia
-    };
-  }
-  componentDidMount() {
-    this.data = fetch(
-      'https://academy-video-api.herokuapp.com/content/free-items',
-      {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        this.setState({ data });
-      })
-      .catch(console.log);
-  }
-
-  addFavorite(event) {
-    let movieCardId = event.target.parentNode.id;
-    // this.setState({ favorites: this.state.favorites.push(movieCardId) });
-    // console.log(this.state.favorites);
-  }
+  // const {isLoading, setIsLoading} = useState(false)
 
   render() {
     return (
@@ -51,28 +28,24 @@ class App extends React.Component {
           <Header />
           <Switch>
             <Route exact path="/">
-              <ImageScreen />
-              <MainContent>
-                {this.state.data.map((item) => {
-                  return (
-                    this.state.data.length > 0 && (
-                      <MovieCard
-                        id={item.id}
-                        title={item.title}
-                        description={item.description}
-                        source={item.image}
-                        onClick={this.addFavorite}
-                      />
-                    )
-                  );
-                })}
-              </MainContent>
+              <Home />
             </Route>
             <Route exact path="/login">
               <MainContent>
                 <Login />
               </MainContent>
             </Route>
+            <PrivateRoute exact path="/content/items">
+              <UserContent />
+            </PrivateRoute>
+            {/* <PrivateRoute exact path="/content/items/:itemId">
+              <SingleCardPage />
+            </PrivateRoute> */}
+            <Redirect
+              exact
+              from="/"
+              to={localStorage.getItem('token' ? '/content' : '/home')}
+            />
           </Switch>
           <Footer>
             We care about your entertainment. Copyright © 2019–2020 felix.com

@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.css';
 
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Button({ children, size, onClick, ...props }) {
   // const history = useHistory();

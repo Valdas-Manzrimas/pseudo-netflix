@@ -1,60 +1,53 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import './index.scss';
 
 import { withRouter } from 'react-router-dom';
 
 import Button from '../components/Button';
 
-class Login extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      emailInput: '',
-      passwordInput: '',
-    };
-  }
+export function Login({ history }) {
+  const [emailInput, setEmailInput] = useState('');
+  const [passwordInput, setPasswordInput] = useState('');
 
-  signIn = (e) => {
+  let signIn = useCallback(async (e) => {
     e.preventDefault();
-    fetch('https://academy-video-api.herokuapp.com/auth/login', {
+    await fetch('https://academy-video-api.herokuapp.com/auth/login', {
       method: 'POST',
       body: JSON.stringify({
-        username: this.state.emailInput,
-        password: this.state.passwordInput,
+        username: emailInput,
+        password: passwordInput,
       }),
       headers: { 'Content-Type': 'application/json' },
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        throw res.json();
+      })
       .then((response) => {
         localStorage.setItem('token', response.token);
-        this.props.history('/content'); //linkas kur nukeliausime
+        history.replace('/content/items');
       })
-      .catch(console.log);
+      .catch(console.log('Incorrect email or password'));
+  });
+
+  let setEmail = (e) => {
+    setEmailInput(e.target.value);
   };
 
-  setEmail = (e) => {
-    this.setState({ emailInput: e.target.value });
+  let setPassword = (e) => {
+    setPasswordInput(e.target.value);
   };
 
-  setPassword = (e) => {
-    this.setState({ passwordInput: e.target.value });
-  };
-
-  render() {
-    return (
-      <div className="Login">
-        <form onSubmit={this.signIn}>
-          <input type="text" placeholder="Email" onChange={this.setEmail} />
-          <input
-            type="password"
-            placeholder="Password"
-            onChange={this.setPassword}
-          />
-          <Button type="submit">Login</Button>
-        </form>
-      </div>
-    );
-  }
+  return (
+    <div className="Login">
+      <form onSubmit={signIn}>
+        <input type="text" placeholder="Email" onChange={setEmail} />
+        <input type="password" placeholder="Password" onChange={setPassword} />
+        <Button type="submit">Login</Button>
+      </form>
+    </div>
+  );
 }
-
 export default withRouter(Login);

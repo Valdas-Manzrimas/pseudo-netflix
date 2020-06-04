@@ -1,19 +1,16 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './index.scss';
 
-import ImageScreen from '../components/ImageScreen';
-import MovieCard from '../components/MovieCard';
 import MainContent from '../components/MainContent';
+import MovieCard from '../components/MovieCard';
 
-export function Home() {
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [error, setError] = useState(null);
+export function UserContent() {
   const [data, setData] = useState([]);
   const [favorites, setFavorites] = useState([]);
 
   const dataAPI = useCallback(async () => {
     const response = await fetch(
-      'https://academy-video-api.herokuapp.com/content/free-items',
+      'https://academy-video-api.herokuapp.com/content/items',
       {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
@@ -32,16 +29,13 @@ export function Home() {
     let movieCardId = event.target.parentNode.id;
     if (favorites.includes(movieCardId)) {
       setFavorites(favorites.filter((event) => event !== movieCardId));
-      console.log(favorites);
     } else {
       setFavorites(favorites.concat(movieCardId));
     }
-    console.log(favorites);
   };
 
   return (
-    <div className="Home">
-      <ImageScreen />
+    <React.Fragment>
       <MainContent>
         {data.map((item) => {
           return (
@@ -55,8 +49,8 @@ export function Home() {
           );
         })}
       </MainContent>
-    </div>
+    </React.Fragment>
   );
 }
 
-export default Home;
+export default UserContent;
