@@ -9,7 +9,6 @@ export function Home() {
   // const [isLoading, setIsLoading] = useState(false);
   // const [error, setError] = useState(null);
   const [data, setData] = useState([]);
-  const [favorites, setFavorites] = useState([]);
 
   const dataAPI = useCallback(async () => {
     const response = await fetch(
@@ -28,17 +27,7 @@ export function Home() {
     dataAPI();
   }, [dataAPI]);
 
-  const toogleFavorite = (event) => {
-    let movieCardId = event.target.parentNode.id;
-    if (favorites.includes(movieCardId)) {
-      setFavorites(favorites.filter((event) => event !== movieCardId));
-      console.log(favorites);
-    } else {
-      setFavorites(favorites.concat(movieCardId));
-    }
-    console.log(favorites);
-  };
-
+  console.log('here', data);
   return (
     <div className="Home">
       <ImageScreen />
@@ -50,7 +39,6 @@ export function Home() {
               title={item.title}
               description={item.description}
               source={item.image}
-              onClick={toogleFavorite}
             />
           );
         })}

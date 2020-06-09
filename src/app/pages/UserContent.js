@@ -32,6 +32,7 @@ export function UserContent() {
     } else {
       setFavorites(favorites.concat(movieCardId));
     }
+    console.log(favorites);
   };
 
   return (
