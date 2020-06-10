@@ -12,9 +12,9 @@ function FavoriteButton({ movieId, favorites, toggleFavorite }) {
   );
 }
 
-function mapStateToProps({ favorites }) {
+function mapStateToProps({ content }) {
   return {
-    favorites: favorites,
+    favorites: content.favorites,
   };
 }
 

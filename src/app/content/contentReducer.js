@@ -1,5 +1,5 @@
 const DEFAULT_CONTENT_STATE = {
-  favorites: ['ee9499-Spider-Man:-14b56c'],
+  favorites: [],
 };
 
 function contentReducer(state = DEFAULT_CONTENT_STATE, action) {
