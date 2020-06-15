@@ -9,7 +9,6 @@ import MovieCard from '../components/MovieCard';
 
 export function UserContent({ token }) {
   const [data, setData] = useState([]);
-  const [favorites, setFavorites] = useState([]);
   const history = useHistory();
 
   const dataAPI = useCallback(async () => {
@@ -36,16 +35,6 @@ export function UserContent({ token }) {
     dataAPI();
   }, [dataAPI]);
 
-  const toogleFavorite = (event) => {
-    let movieCardId = event.target.parentNode.id;
-    if (favorites.includes(movieCardId)) {
-      setFavorites(favorites.filter((event) => event !== movieCardId));
-    } else {
-      setFavorites(favorites.concat(movieCardId));
-    }
-    console.log(favorites);
-  };
-
   return (
     <React.Fragment>
       <MainContent>
@@ -56,7 +45,6 @@ export function UserContent({ token }) {
               title={item.title}
               description={item.description}
               source={item.image}
-              onClick={toogleFavorite}
             />
           );
         })}

@@ -1,13 +1,10 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import './index.scss';
 
-import { useHistory, useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import MainContent from '../../components/MainContent';
 import MovieCard from '../../components/MovieCard';
-
-// const history = useHistory();
-// const location = useLocation();
 
 export function SingleCardPage() {
   const [data, setData] = useState({});
@@ -19,34 +16,33 @@ export function SingleCardPage() {
       {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
+        authorization: localStorage.getItem('token'),
       }
     );
-    console.log(data);
-    if (response.ok) {
-      setData(await response.json());
+
+    if (!response.ok) {
+      console.log(response);
+      throw response.json();
     }
-  }, [setData]);
+
+    setData(await response.json());
+  }, [id, setData]);
 
   useEffect(() => {
     moviePage();
   }, [moviePage]);
 
   return (
-    <React.Fragment>
-      <MainContent>
-        {/* {data.map((item) => {
-          return ( */}
+    <MainContent>
+      {!!data && (
         <MovieCard
           id={data.id}
           title={data.title}
           description={data.description}
           source={data.image}
-          // onClick={toogleFavorite}
         />
-        {/* ); */}
-        })
-      </MainContent>
-    </React.Fragment>
+      )}
+    </MainContent>
   );
 }
 

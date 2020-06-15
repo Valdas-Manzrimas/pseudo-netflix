@@ -21,7 +21,7 @@ button:hover {
 .button--large {
   padding: 15px 40px;
 }
-
+/* 
 a {
   padding: 6px 25px;
   background-color: rgb(206, 36, 36);
@@ -37,4 +37,4 @@ a {
 a:hover {
   background-color: rgb(202, 80, 80);
   border: 1px solid rgb(202, 80, 80);
-}
+} */

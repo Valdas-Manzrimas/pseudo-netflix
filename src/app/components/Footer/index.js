@@ -1,5 +1,5 @@
 import React from 'react';
-import './index.css';
+import './index.scss';
 
 import visa from '../../../assets/visa.png';
 import maestro from '../../../assets/maestro.png';
