@@ -53,9 +53,9 @@ const enhance = compose(
       };
     },
     (dispatch) => {
-      console.log('here', content);
+      console.log('here', content.actions.t);
       return {
-        toogleFavorite: bindActionCreators(
+        toggleFavorite: bindActionCreators(
           content.actions.toggleFavorite,
           dispatch
         ),

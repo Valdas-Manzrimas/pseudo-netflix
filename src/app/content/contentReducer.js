@@ -25,7 +25,7 @@ function contentReducer(state = DEFAULT_CONTENT_STATE, action) {
       return removeFavorite(state, action);
 
     case actionTypes.ADD_FAVORITE:
-      return addFavorite(state.action);
+      return addFavorite(state, action);
 
     default:
       return state;
