@@ -36,6 +36,7 @@ export function SingleCardPage() {
     <MainContent>
       {!!data && (
         <MovieCard
+          ownClass="singleMoviePage"
           id={data.id}
           title={data.title}
           description={data.description}

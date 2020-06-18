@@ -27,7 +27,6 @@ export function Home() {
     dataAPI();
   }, [dataAPI]);
 
-  console.log('here', data);
   return (
     <div className="Home">
       <ImageScreen />

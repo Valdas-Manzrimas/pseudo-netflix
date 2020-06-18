@@ -53,7 +53,6 @@ const enhance = compose(
       };
     },
     (dispatch) => {
-      console.log('here', content.actions.t);
       return {
         toggleFavorite: bindActionCreators(
           content.actions.toggleFavorite,
